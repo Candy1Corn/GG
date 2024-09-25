@@ -17,9 +17,9 @@ type Book struct {
 
 const (
 	filePath = "./LibraryIndex.json"
-	借書天數     = 7
-	預定使用者名稱  = "訪客"
-	預定使用者密碼  = "abcd1234"
+	借書天數 = 7
+	預定使用者名稱 = "訪客"
+	預定使用者密碼 = "abcd1234"
 )
 
 func loadBooks() ([]Book, error) {
@@ -241,7 +241,9 @@ func login() bool {
 func main() {
 	if 成功登入 := login(); 成功登入 {
 		for {
-			fmt.Print("需要做甚麼呢？  a.新書紀錄  b.借書  c.還書  d.書籍遺失登記  e.退出  :  ")
+			fmt.Println("+___________ଲ(ⓛ ω ⓛ)ଲ__________+")
+			fmt.Print("|需要做甚麼喵？  \n|a.新貓紀錄\t\t\t|  \n|b.領養貓咪\t\t\t|  \n|c.歸還貓咪\t\t\t|  \n|d.貓咪走失登記\t\t\t|  \n|e.退出 : \t\t\t|")
+			fmt.Println("\n|______________________________」")
 			var 執行 string
 			fmt.Scanln(&執行)
 
