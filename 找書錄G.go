@@ -18,6 +18,8 @@ type Book struct {
 const (
 	filePath = "./LibraryIndex.json"
 	借書天數     = 7
+	預定使用者名稱  = "訪客"
+	預定使用者密碼  = "abcd1234"
 )
 
 func loadBooks() ([]Book, error) {
@@ -212,34 +214,55 @@ func 還書() {
 	fmt.Println("請檢查是不是打錯字了喔！")
 }
 
-func main() {
-	for {
-		fmt.Print("需要做甚麼呢？  a.新書紀錄  b.借書  c.還書  d.書籍遺失登記  e.退出  :  ")
-		var 執行 string
-		fmt.Scanln(&執行)
+func login() bool {
+	var 輸入的名稱 string
+	var 輸入的密碼 string
 
-		switch 執行 {
-		case "a":
-			新書紀錄()
-		case "b":
-			借書()
-		case "c":
-			還書()
-		case "d":
-			書籍丟失()
-		case "e":
-			fmt.Println("謝謝使用，再見！")
-			return
-		default:
-			fmt.Println("似乎輸入錯了，再來一次吧！")
+	fmt.Println("請先登入")
+	fmt.Scanln("使用者名稱", &輸入的名稱)
+	fmt.Scanln("密碼", &輸入的密碼)
+	if 輸入的名稱 == 預定使用者名稱 {
+		if 輸入的密碼 == 預定使用者密碼 {
+			fmt.Println("登入成功")
+			return true
+		} else {
+			fmt.Println("密碼錯誤")
+			return false
 		}
+	} else {
+		fmt.Println("無此使用者")
 	}
+	return false
 }
 
-//各種內心獨白
-//以前自學python 學得毫無章法，還沒練習過如何處裡json 檔，要不要練習一下呢？可是花時間去研究這個的話會沒時間學go 怎麼辦……
-//不然我先用python 寫完再讓AI 幫我翻譯成go 好了
-//還有好多邊界條件沒排掉
-//不行了不能再改下去了，再改下去會沒時間睡覺，晚睡就會晚起，晚起9/15就會很晚才去辦台灣人居住證，就會沒時間學go了！！
-//AI 翻譯成go 之後有錯誤訊息QAQ
-//我筆電(筆記本)目前只能打繁體字，人家真的看得懂嗎？
+//預定使用者名稱  = "訪客"
+//預定使用者密碼  = "abcd1234"
+
+func main() {
+	if 成功登入 := login(); 成功登入 {
+		for {
+			fmt.Print("需要做甚麼呢？  a.新書紀錄  b.借書  c.還書  d.書籍遺失登記  e.退出  :  ")
+			var 執行 string
+			fmt.Scanln(&執行)
+
+			switch 執行 {
+			case "a":
+				新書紀錄()
+			case "b":
+				借書()
+			case "c":
+				還書()
+			case "d":
+				書籍丟失()
+			case "e":
+				fmt.Println("謝謝使用，再見！")
+				return
+			default:
+				fmt.Println("似乎輸入錯了，再來一次吧！")
+			}
+		}
+	} else {
+		fmt.Println("請再試一次吧!")
+	}
+
+}
