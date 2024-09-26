@@ -9,10 +9,10 @@ import (
 )
 
 type Book struct {
-	Name   string        `json:"name"`
-	Author string        `json:"author"`
-	ID     int           `json:"ID"`
-	State  []interface{} `json:"state"`
+	Name string `json:"name"`
+	Author string `json:"author"`
+	ID int `json:"ID"`
+	State []interface{} `json:"state"`
 }
 
 const (
@@ -164,7 +164,7 @@ func Borrow() {
 
 				if getStateString(book.State, 0) == "未借出" && book.ID == BookID {
 					now := time.Now()
-
+					
 					fmt.Print("請輸入你的名字：")
 					fmt.Scanln(&BorrowerName)
 					fmt.Println("\n")	
